@@ -17,7 +17,7 @@ button {
   color: black; 
   text-align: center;
   padding: 10px;
-  transition: all 0.5s;
+  transition: all 0.2s;
   cursor: pointer;
 }
 
@@ -38,11 +38,12 @@ button:hover {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(#111111, transparent);
+  background: linear-gradient(#000000, transparent);
 }
 
 .header_logo img{
-  margin-top: 50px;
+  width: 70%;
+  margin-top: 10px;
   margin-left: 20px;
   border: 0px;
 }
@@ -57,11 +58,17 @@ button:hover {
   color: white;
   text-decoration: none;
   font-size: 20px;
-  font-weight: 600;
   margin-right: 20px;
+  transition: all 0.2s;
 }
 
-/* Best movie */
+.nav a:hover {
+  font-weight: bold;
+}
+
+
+
+/*** Best movie */
 
 .best {
   height: 400px;
@@ -69,7 +76,7 @@ button:hover {
   flex-direction: column;
   background-image: url(images/dust.jpg);
   background-size: cover;
-  padding: 180px 200px 180px 150px;
+  padding: 150px 200px 180px 250px;
 }
 
 .best_movie_title {
@@ -84,16 +91,18 @@ button:hover {
 }
 
 .best_movie_description p{
-  margin-right: 50%;
-  margin-top: 40px;
+  margin-right: 60%;
+  margin-top: 5%;
   text-align: justify;
   line-height: 150%;
   font-style: italic;
 }
 
 .best_movie_cover img{
-  width: 200%;
-  max-width: 250px; 
+  width: 20%;
+  max-width: 300px;
+  margin-right: 150px;
+  margin-top: 20px;
   float: right;
   border-radius: 10px;
   filter: drop-shadow(10px 10px 15px black)
@@ -103,92 +112,119 @@ button:hover {
 
 /* Categories */
 
-.category {
+.categories {
+  width: 100%;
+  height: 600px;
   display: flex;
   align-items: center;
-  width: 95%;
-  margin: auto;
+  justify-content: center;
 }
 
-.category1, .category2, .category3 {
-  margin-top: 50px
+.container {
+  width: 1200px;
 }
 
-.category h2{
-  width: 95%;
-  font-size: 25px;
-  margin-left: 30px;
-  margin-top: 60px;
-  margin-bottom: 50px
+.container h2 {
+  font-weight: bold;
+  margin-top: 50px;
 }
 
-.arrow_left, .arrow_right {
-  background-color: #222222;
-  color: white; 
-  display: inline;
-  font-size: 40px;
-  padding: 0px 50px 0px 50px;
-}
 
-.arrow_left:hover, .arrow_right:hover {
-  background-color: #222222;
-  font-size: 50px;
-}
 
-.carrousel {
-  list-style: none;
+
+/* Carrousel */
+
+.carrousel--container {
+  width: 100%;
+  height: 430px;
   display: flex;
-  flex-direction: row;
-  overflow-x: hidden;
-}
-
-.carrousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carrousel-item {
+  align-items: center;
+  justify-content: center;
   position: relative;
-  height: 80%;
-  width: 50%;
-  margin: 0 40px 0 0;
-  border-radius: 20px;
-  position: relative;
-  left: 0;
-  transition: 0.8s;
+  background: none;
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+.carrousel--content {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 70%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+.box {
+  background: none;
+  width: 200px;
+  margin-right: 70px;
+  border-radius: 10px;
 }
 
-.carrousel-item img{
+.box img{
   opacity: 1;
   display: block;
-  max-height: 400px;
-  float: right;
+  width: 120%;
+  max-height: 600px;
   border-radius: 10px;
   transition: .5s ease;
   backface-visibility: hidden;
+  box-shadow: 3px 15px 15px rgba(0, 0, 0, 0.2);
 }
+
+.btn {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  height: 220px;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  transform: translateY(-50%) scale(0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.1s ease;
+}
+
+.btn.show {
+  border: none;
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn.left {
+  left: 0;
+}
+
+.btn.right {
+  right: 0;
+}
+
+
+
+/* Overlay */
 
 .overlay {
   transition: .5s ease;
   opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(10%, -180%);
   text-align: center;
 }
 
-.carrousel-item:hover img{
+.box:hover img{
   opacity: 0.3;
 }
 
-.carrousel-item:hover .overlay{
+.box:hover .overlay{
   opacity: 1;
 }
 
 .overlay p{
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 60px
+  padding-bottom: 60px
 }
 
 .overlay_button{
@@ -211,6 +247,7 @@ button:hover {
   height: 100%;
   overflow: scroll;
   background-color: rgba(0,0,0,0.4);
+  transition: .5ms ease;
 }
 
 .modal::-webkit-scrollbar {
@@ -223,12 +260,16 @@ button:hover {
   padding: 30px 30px 60px 30px;
   border-radius: 10px;
   width: 80%;
+  max-width: 1500px;
 }
 
-.best_movie_cover img{
+.modal_cover_image img{
+  width: 20%;
+  max-width: 280px;
   border-radius: 10px;
   margin-right: 150px;
   margin-top: 80px;
+  float: right;
   filter: drop-shadow(10px 10px 15px #111111)
 }
 
@@ -240,7 +281,7 @@ button:hover {
 
 .metadata {
   margin-right: 10px;
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 0;
   font-weight: bold;
 }
@@ -257,7 +298,7 @@ button:hover {
 }
 
 .best_movie_info {
-  font-size: 13px;
+  font-size: 14px;
   margin-right: 50%;
   margin-left: 30px;
   text-align: justify;
