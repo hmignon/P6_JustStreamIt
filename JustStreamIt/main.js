@@ -3,67 +3,34 @@ let mainUrl = "http://localhost:8000/api/v1/titles/"
 fetchBestMovie()
 fetchCategories('')
 fetchCategories('horror')
-fetchCategories('fantasy')
-fetchCategories('action')
+fetchCategories('history')
+fetchCategories('romance')
 
 
 
 // Carrousel controls
 
-var carrouselLeftValue = 0;
-var widthToMove = 380;
-var arrowBtnWidth = 40;
-var noOfSlides = 4;
-var currentSlide = 1;
+function moveCarrouselLeft(category) {
 
-
-function moveCarrouselLeft(category){
-
-    var carrouselContent = document.querySelector("#" + category + "-movies");
-
-    if(currentSlide == 2) 
-      carrouselLeftValue -= widthToMove - arrowBtnWidth;
-    else 
-      carrouselLeftValue -= widthToMove;
+  var carrouselContent = document.querySelector("#" + category + "-movies");
+  var carrouselLeftBtn = document.querySelector("#" + category + "-left");
+  var carrouselRightBtn = document.querySelector("#" + category + "-right");
     
-    currentSlide++;
-    manageButtons(category);
-    carrouselContent.style.left = `${carrouselLeftValue}px`;
-
+  carrouselContent.style.left = "-680px";
+  carrouselRightBtn.classList.remove("show");
+  carrouselLeftBtn.classList.add("show");
 }
 
-function moveCarrouselRight(category){
+function moveCarrouselRight(category) {
 
-    var carrouselContent = document.querySelector("#" + category + "-movies");
+  var carrouselContent = document.querySelector("#" + category + "-movies");
+  var carrouselLeftBtn = document.querySelector("#" + category + "-left");
+  var carrouselRightBtn = document.querySelector("#" + category + "-right");
 
-    if(currentSlide == 2) 
-      carrouselLeftValue = 8;
-    else 
-      carrouselLeftValue += widthToMove;
-
-    currentSlide--;
-    manageButtons(category);
-    carrouselContent.style.left = `${carrouselLeftValue}px`;
-
+  carrouselContent.style.left = "0px";
+  carrouselRightBtn.classList.add("show");
+  carrouselLeftBtn.classList.remove("show");
 }
-
-function manageButtons(category){
-
-    let carrouselLeftBtn = document.querySelector("#" + category + "-left");
-    let carrouselRightBtn = document.querySelector("#" + category + "-right");
-
-    if(currentSlide == noOfSlides - 1)
-      carrouselRightBtn.classList.remove("show");
-    else
-        carrouselRightBtn.classList.add("show");
-
-    if(currentSlide == 1)
-      carrouselLeftBtn.classList.remove("show");
-    else
-        carrouselLeftBtn.classList.add("show");
-
-}
-
 
 
 
@@ -71,31 +38,29 @@ function manageButtons(category){
 
 function fetchBestMovie() {
 
-	let bestTitle = document.getElementById('top-title');
-	let bestImg = document.getElementById('top-cover0');
+	var bestTitle = document.getElementById('top-title');
+	var bestImg = document.getElementsByClassName('best-cover')[0].getElementsByTagName("img")[0];
 
 	fetch(mainUrl + "?sort_by=-imdb_score")
 	.then(response => response.json())
 	.then(data => {
     bestTitle.innerHTML = data["results"][0]["title"];
 		bestImg.src = data["results"][0]["image_url"];
-    bestImg.alt = data["results"][0]["id"];
+    bestImg.id = bestImg.alt = data["results"][0]["id"];
 
     var url = data["results"][0]["url"];
     fetchBestDescription(url)
-
 	})
 }
 
 function fetchBestDescription(url) {
 
-  var bestDesc = document.getElementById('top-desc');
+  var bestDesc = document.getElementsByClassName('best-desc')[0];
 
   fetch(url)
 	.then(response => response.json())
 	.then(data => {
     bestDesc.innerHTML = data["description"];
-
 	})
 }
 
@@ -115,17 +80,19 @@ function fetchCategories(category) {
       var dataPage2 = data["results"];
       var dataAll = dataPage1.concat(dataPage2);
 
+      if (category == '')
+        dataAll.shift();   // for best-rated category, skip first movie
+
       for (i=0; i<7; i++) {
         var movieCover = dataAll[i]["image_url"];
         var movieTitle = dataAll[i]["title"];
         var movieId = dataAll[i]["id"];
         var currentMovieTitle = document.getElementById(category + (i+1).toString()).getElementsByTagName("p")[0];
-        var currentMovieCover = document.getElementById(category + "-cover" + (i+1).toString());
+        var currentMovieCover = document.getElementById(category + (i+1).toString()).getElementsByTagName("img")[0];
             
         currentMovieCover.src = movieCover;
-        currentMovieCover.alt = movieId;
+        currentMovieCover.id = currentMovieCover.alt = movieId;
         currentMovieTitle.innerHTML = movieTitle;
-
       }
     })
   })
@@ -140,9 +107,9 @@ function openModal(category, num) {
   var modal = document.getElementById("modal");
   var span = document.getElementsByClassName("close")[0];
 
-  var id = document.getElementById(category + '-cover' + num.toString()).alt;
+  var modalId = document.getElementById(category + num.toString()).getElementsByTagName("img")[0].id;
 
-  fetchModalData(id)
+  fetchModalData(modalId)
 
   modal.style.display = "block";
 
@@ -151,9 +118,8 @@ function openModal(category, num) {
   }
 
   window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target == modal)
       modal.style.display = "none";
-    }
   }
 }
 
@@ -182,9 +148,11 @@ function fetchModalData(id) {
     else
       document.getElementById('modal-rating').innerHTML = data["rated"] + "+";
 
-    if(data["worldwide_gross_income"] == null)
-      document.getElementById('modal-box-office').innerHTML = "N/A";
+    var modalBoxOffice = document.getElementById('modal-box-office');
+
+    if (data["worldwide_gross_income"] == null)
+      modalBoxOffice.innerHTML = "N/A";
     else
-      document.getElementById('modal-box-office').innerHTML = data["worldwide_gross_income"] + " " + data["budget_currency"];
+      modalBoxOffice.innerHTML = data["worldwide_gross_income"] + " " + data["budget_currency"];
 	})
 }
