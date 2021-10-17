@@ -12,9 +12,7 @@ body {
 button {
   border: none;
   border-radius: 5px;
-  background-color: white; 
-  color: black; 
-  text-align: center;
+  background-color: white;
   padding: 10px;
   transition: all 0.2s;
   cursor: pointer;
@@ -33,7 +31,6 @@ button:hover {
 .header {
   width: 100%;
   height: 80px;
-  background: none;
   position: absolute;
   display: inline-flex;
   align-items: center;
@@ -45,7 +42,6 @@ button:hover {
   width: 70%;
   margin-top: 10px;
   margin-left: 20px;
-  border: 0px;
 }
 
 .nav_bar {
@@ -71,9 +67,6 @@ button:hover {
 /* Best movie */
 
 .best {
-  height: 80%;
-  display: block;
-  flex-direction: column;
   background-image: url(images/dust.jpg);
   background-size: cover;
   padding: 150px 200px 180px 200px;
@@ -81,11 +74,9 @@ button:hover {
 
 .best_movie_title {
   font-size: 45px;
-  font-weight: bold;
 }
 
 .button {
-  display: inline-block;
   font-size: 18px;
   width: 120px;
 }
@@ -93,9 +84,7 @@ button:hover {
 .best_movie_description p{
   margin-right: 60%;
   margin-top: 3%;
-  width: 30%;
-  text-align: left;
-  line-height: 150%;
+  line-height: 180%;
   font-style: italic;
 }
 
@@ -103,8 +92,6 @@ button:hover {
   width: 40%;
   max-width: 280px;
   min-width: 200px;
-  margin-right: 3%;
-  margin-top: 20px;
   float: right;
   border-radius: 10px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
@@ -115,7 +102,6 @@ button:hover {
 /* Categories */
 
 .categories {
-  width: 100%;
   height: 600px;
   display: flex;
   align-items: center;
@@ -129,8 +115,6 @@ button:hover {
 
 .container h2 {
   font-size: 26px;
-  font-weight: bold;
-  margin-top: 20px;
 }
 
 
@@ -139,18 +123,15 @@ button:hover {
 /* Carrousel */
 
 .carrousel--container {
-  width: 100%;
   height: 430px;
   display: flex;
   align-items: center;
-  justify-content: center;
   position: relative;
-  border-radius: 0.2rem;
   overflow: hidden;
 }
+
 .carrousel--content {
   display: flex;
-  justify-content: center;
   position: absolute;
   top: 300px;
   bottom: -390px;
@@ -158,20 +139,16 @@ button:hover {
   transform: translateY(-50%);
   transition: all 0.7s ease;
 }
+
 .box {
-  background: none;
   width: 200px;
   margin-right: 70px;
-  border-radius: 10px;
 }
 
 .box img{
-  opacity: 1;
-  display: block;
   width: 240px;
   border-radius: 10px;
   transition: .5s ease;
-  backface-visibility: hidden;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -179,7 +156,7 @@ button:hover {
   background-color: #222222;
   color: white;
   height: 370px;
-  font-size: 40px;
+  font-size: 36px;
   position: absolute;
   width: 40px;
   transform: translateY(-50%) scale(0.5);
@@ -201,6 +178,7 @@ button:hover {
 .btn.right {
   right: 0;
 }
+
 
 
 
@@ -234,24 +212,16 @@ button:hover {
 
 
 
+
 /* Modal */
 
 .modal {
   display: none;
   position: fixed;
-  flex-direction: column;
-  z-index: 1;
-  left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: scroll;
   background-color: rgba(0,0,0,0.6);
-  transition: .5ms ease;
-}
-
-.modal::-webkit-scrollbar {
-  display: none;
 }
 
 .modal-content {
@@ -261,14 +231,13 @@ button:hover {
   border-radius: 10px;
   width: 80%;
   max-width: 1500px;
-  height: fit-content;
   min-height: 350px;
 }
 
 .modal_cover_image img{
   height: 340px;
   border-radius: 10px;
-  margin-right: 150px;
+  margin-right: 120px;
   margin-top: 1%;
   float: right;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
@@ -277,31 +246,31 @@ button:hover {
 .modal-content h3{
   display: inline-block;
   font-size: 24px;
-  font-weight: bold;
-}
-
-.metadata {
-  font-size: 15px;
-  margin-top: 0;
-  font-weight: bold;
-}
-
-.genres, strong {
-  color: #caaa76;
 }
 
 .modal_button {
   font-size: 14px;
   margin-left: 30px;
-  margin-top: 20px;
   width: 80px;
 }
 
-.best_movie_info {
-  font-size: 14px;
-  margin-right: 50%;
+.modal_movie_info {
+  font-size: 15px;
+  margin-right: 40%;
   margin-left: 30px;
-  text-align: left;
+}
+
+.metadata {
+  font-weight: bold;
+}
+
+.modal-content p {
+  display: inline;
+  line-height: 150%;
+}
+
+.genres, strong {
+  color: #caaa76;
 }
 
 .plot {

@@ -1,4 +1,4 @@
-let mainUrl = "http://localhost:8000/api/v1/titles/"
+const mainUrl = "http://localhost:8000/api/v1/titles/"
 
 fetchBestMovie()
 fetchCategories('')
@@ -46,7 +46,7 @@ function fetchBestMovie() {
 	.then(data => {
     bestTitle.innerHTML = data["results"][0]["title"];
 		bestImg.src = data["results"][0]["image_url"];
-    bestImg.id = bestImg.alt = data["results"][0]["id"];
+    bestImg.id = data["results"][0]["id"];
 
     var url = data["results"][0]["url"];
     fetchBestDescription(url)
@@ -91,7 +91,7 @@ function fetchCategories(category) {
         var currentMovieCover = document.getElementById(category + (i+1).toString()).getElementsByTagName("img")[0];
             
         currentMovieCover.src = movieCover;
-        currentMovieCover.id = currentMovieCover.alt = movieId;
+        currentMovieCover.id = movieId;
         currentMovieTitle.innerHTML = movieTitle;
       }
     })
@@ -140,19 +140,24 @@ function fetchModalData(id) {
     document.getElementById('modal-directors').innerHTML = data["directors"];
     document.getElementById('modal-cast').innerHTML = data["actors"] + "...";
     document.getElementById('modal-country').innerHTML = data["countries"];
-    document.getElementById('modal-desc').innerHTML = data["long_description"];
 
 
     if (typeof data["rated"] === 'string' || data["rated"] instanceof String)
       document.getElementById('modal-rating').innerHTML = data["rated"];
     else
-      document.getElementById('modal-rating').innerHTML = data["rated"] + "+";
+      document.getElementById('modal-rating').innerHTML = data["rated"] + "+";  // add "+" if age rating is a number
 
     var modalBoxOffice = document.getElementById('modal-box-office');
-
     if (data["worldwide_gross_income"] == null)
-      modalBoxOffice.innerHTML = "N/A";
-    else
+      modalBoxOffice.innerHTML = "N/A";  // placeholder for unspecified box-office   
+    else 
       modalBoxOffice.innerHTML = data["worldwide_gross_income"] + " " + data["budget_currency"];
+
+    var regExp = /[a-zA-Z]/g;
+    if (regExp.test(data["long_description"]))
+      document.getElementById('modal-desc').innerHTML = data["long_description"]; 
+    else
+      document.getElementById('modal-desc').innerHTML = "N/A";  // placeholder for missing description
+    
 	})
 }
