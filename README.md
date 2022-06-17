@@ -38,5 +38,5 @@ To access the page, open the `index.html` file in any web browser.
 ## Full page screenshot
 
 <p align="center">
-    <img height="2000" src="C:\Users\Hélène\GitHub\P6_mignon_helene\img\screenshot.png" alt="full page screenshot" />
+    <img height="2000" src="img/screenshot.png" alt="full page screenshot" />
 </p>
