@@ -35,8 +35,17 @@ Clone the project: `git clone https://github.com/hmignon/P6_mignon_helene.git`
 
 To access the page, open the `index.html` file in any web browser.
 
-## Full page screenshot
+## Demo
 
 <p align="center">
-    <img src="img/screenshot.png" alt="full page screenshot" />
+    <img src="img/website.gif" alt="website demo" />
 </p>
+
+
+---
+
+## Resources and Credits
+
+- [Background photo](https://www.pexels.com/photo/white-dust-particles-on-black-background-9665187/) by *cottonbro* from Pexels
+- [Bootstrap](https://icons.getbootstrap.com) icons
+- *JustStreamIt* logo provided by OpenClassrooms
